@@ -16,6 +16,12 @@ public class PirateStateManager : MonoBehaviour {
     [Range(30,60)]
     public float ThrowAngle;
 
+    public AudioClip throwEffect;
+    public AudioClip onRiseEffect;
+    public AudioClip onKillEffect;
+
+    private AudioSource audSrc;
+
     private BoxCollider _collider;
 
     private Animator _anim;
@@ -49,9 +55,10 @@ public class PirateStateManager : MonoBehaviour {
         _pirateGO = transform.Find("Pirate_Geometry").gameObject;
         _anim = GetComponent<Animator>();
         _collider = _pirateGO.GetComponent<BoxCollider>();
-
+        Target = GameObject.Find("Target").transform;
         _boat = transform.parent.parent.GetComponent<BoatStateManager>();
         _sm.SwitchStates(_inactive);
+        audSrc = GetComponent<AudioSource>();
         SimplePool.Preload(Fireball, 20);
 	}
 
@@ -73,6 +80,7 @@ public class PirateStateManager : MonoBehaviour {
     void _risingStart() {
         _anim.SetTrigger("Activate");
         _collider.enabled = true;
+        audSrc.PlayOneShot(onRiseEffect);
     }
 
     void _risingUpdate() { }
@@ -110,6 +118,7 @@ public class PirateStateManager : MonoBehaviour {
     void _deadStart() {
         _anim.SetTrigger("Die");
         _collider.enabled = false;
+        audSrc.PlayOneShot(onKillEffect);
     }
 
     void _deadUpdate() { }
@@ -165,6 +174,7 @@ public class PirateStateManager : MonoBehaviour {
         fireballGo.GetComponent<Rigidbody>().velocity = throwVec * v; 
         
         Debug.Log("Shot bullet "+time +", "+ v);
+        audSrc.PlayOneShot(throwEffect);
        // Debug.Break();
     }
 

@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour {
     void spawnUpdate()
     {
         float spawnInterval = getCurrSpawnInterval();
-        Debug.Log("SpawnInterval " + spawnInterval);
+        //Debug.Log("SpawnInterval " + spawnInterval);
         if(runTime - lastSpawnTime > spawnInterval)
         {
             int boatIndex = Random.Range(0, boats.Length);
