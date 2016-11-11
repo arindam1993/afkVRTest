@@ -63,4 +63,9 @@ public class Fireball : MonoBehaviour, IShootable {
     {
         Explode();
     }
+
+    public int GetScore()
+    {
+        return 5;
+    }
 }

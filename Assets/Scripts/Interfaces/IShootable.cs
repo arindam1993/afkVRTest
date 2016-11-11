@@ -5,4 +5,5 @@ public interface IShootable  {
 
 
     void OnShot();
+    int GetScore();
 }

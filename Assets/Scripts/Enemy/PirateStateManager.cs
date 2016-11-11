@@ -66,7 +66,8 @@ public class PirateStateManager : MonoBehaviour {
 
     void _inactiveStart() {
         _collider.enabled = false;
-        _boat.PirateDeactivated(this);
+        
+        //_anim.SetTrigger("Deactivate");
     }
 
     void _inactiveUpdate() { }
@@ -95,7 +96,7 @@ public class PirateStateManager : MonoBehaviour {
 
     void _shootingStart() {
         _anim.SetTrigger("Shoot");
-        _intervalCtr = 0;
+        _intervalCtr = 3;
     }
 
     void _shootingUpdate() {
@@ -144,6 +145,13 @@ public class PirateStateManager : MonoBehaviour {
     public void Deactivate()
     {
         _sm.SwitchStates(_inactive);
+        _boat.PirateDeactivated(this);
+    }
+
+    public void DeactivateNoCb()
+    {
+        _sm.SwitchStates(_inactive);
+        _anim.SetTrigger("Die");
     }
 
     public void StartShooting()

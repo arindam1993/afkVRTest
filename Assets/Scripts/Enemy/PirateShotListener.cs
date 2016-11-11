@@ -15,5 +15,8 @@ public class PirateShotListener : MonoBehaviour, IShootable
         psm.OnShotByPlayer();
     }
 
-    
+    public int GetScore()
+    {
+        return 10;
+    }
 }

@@ -22,14 +22,20 @@ public class EnemySpawner : MonoBehaviour {
 
     void Start()
     {
-        StartSpawning();
     }
 
     public void StartSpawning()
     {
-        runTime = 0;
+        runTime = 6;
         lastSpawnTime = 0;
         IsSpawning = true;
+    }
+    public void DeactivateAll()
+    {
+        foreach(BoatStateManager boat in boats)
+        {
+            boat.DeactivateAll();
+        }
     }
 
     public void StopSpawning()
@@ -58,7 +64,7 @@ public class EnemySpawner : MonoBehaviour {
         {
             int boatIndex = Random.Range(0, boats.Length);
             boats[boatIndex].ActivateRandomPirate();
-            lastSpawnTime = Time.time;
+            lastSpawnTime = runTime;
         }
 
         runTime += Time.fixedDeltaTime;

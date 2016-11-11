@@ -60,6 +60,19 @@ public class BoatStateManager : MonoBehaviour {
         
     }
 
+    public void DeactivateAll()
+    {
+        foreach (PirateStateManager p in _activePirates)
+        {
+            p.DeactivateNoCb();
+        }
+        _activePirates.Clear();
+        foreach (PirateStateManager p in Pirates)
+        {
+            _inactivePirates.Add(p);
+        }
+
+    }
 
 
     public void PirateDeactivated(PirateStateManager pirate)

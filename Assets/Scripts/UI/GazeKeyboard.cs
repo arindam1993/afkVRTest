@@ -10,7 +10,7 @@ public class ScoreSavedEvent: UnityEvent<string, int>
 {
 }
 
-public class GazeKeyboard : MonoBehaviour {
+public class GazeKeyboard : MonoBehaviour, IVRPanel {
 
     public ScoreSavedEvent OnNameSaved;
 
@@ -41,12 +41,16 @@ public class GazeKeyboard : MonoBehaviour {
     public int minNameChars;
     int currNameChars;
 
+
+
 	// Use this for initialization
 	void Start () {
         nameBox = transform.Find("NamePanel").GetComponentInChildren<Text>();
         scoreBox = transform.Find("ScorePanel").GetComponentInChildren<Text>();
         saveBtn = transform.Find("SaveBtn").GetComponentInChildren<Button>();
         backspaceBtn = transform.Find("BackspaceBtn").GetComponentInChildren<Button>();
+
+
         currNameChars = 0;
         saveBtn.interactable = false;
 
@@ -89,5 +93,23 @@ public class GazeKeyboard : MonoBehaviour {
         saveBtn.onClick.AddListener(() =>{
             OnNameSaved.Invoke(EnteredText, Score);
         });
+    }
+
+    public void Show()
+    {
+        GetComponent<Image>().enabled = true;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    public void Hide()
+    {
+        GetComponent<Image>().enabled = false;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 }

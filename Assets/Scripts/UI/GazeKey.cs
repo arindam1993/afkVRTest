@@ -7,6 +7,6 @@ public class GazeKey : MonoBehaviour {
 	// Use this for initialization
 	public void AppendKeyCode(Text nameBox)
     {
-        nameBox.text += gameObject.name + "\t";
+        nameBox.text += gameObject.name;
     }
 }
